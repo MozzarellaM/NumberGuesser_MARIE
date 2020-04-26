@@ -1,0 +1,6 @@
+/# 03_StringDemo.mas
+	Load THE_LETTER_A
+	Output
+	Halt
+
+THE_LETTER_A, dec 97

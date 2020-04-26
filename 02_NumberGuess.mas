@@ -1,0 +1,223 @@
+/ 02_NumberGuess.mas
+/
+/ Demonstrates the basic functionality of a number guessing game.
+/ The number to be guessed is hardcoded in a value called SecretNumber
+
+Jump Main
+
+/ ### MAIN PROGRAM ###
+Main, Clear
+
+MainLoop, Clear
+	Load GuessCount
+	Subt MaximumGuesses
+	Skipcond 400 / Skip if Guesses = MaximumGuesses
+	Jump InputGuess
+	JnS SubrPrintYouLose
+	Halt
+
+InputGuess, Clear
+	JnS SubrPrintGuessANumber / "Guess number!"
+	Input
+	Store YourNumber
+	Subt SecretNumber
+	Store Difference
+	Skipcond 400 	/ If (A - B = 0), you win
+	Jump TooLowTooHigh
+	JnS SubrPrintYouWin
+	Halt
+
+TooLowTooHigh, Clear
+	Load Difference
+	Skipcond 000 / Unless !(A < B), number too high
+	JnS SubrPrintGuessTooHigh
+	Load Difference
+	Skipcond 800 / If !(A > B), number too low
+	JnS SubrPrintGuessTooLow
+	Load GuessCount / Increment GuessCount
+	Add _ONE
+	Store GuessCount
+	Jump MainLoop
+
+/ ### STRING LITERALS ###
+
+StringGuessANumber, hex 01E
+	DEC 71
+	DEC 117
+	DEC 101
+	DEC 115
+	DEC 115
+	DEC 32
+	DEC 110
+	DEC 117
+	DEC 109
+	DEC 98
+	DEC 101
+	DEC 114
+	DEC 33
+	DEC 40
+	DEC 48
+	DEC 45
+	DEC 49
+	DEC 48
+	DEC 48
+	DEC 41
+	DEC 10
+	DEC -1 / End string
+StringGuessTooHigh, hex 035
+	DEC 89
+	DEC 111
+	DEC 117
+	DEC 32
+	DEC 103
+	DEC 117
+	DEC 101
+	DEC 115
+	DEC 115
+	DEC 101
+	DEC 100
+	DEC 32
+	DEC 116
+	DEC 111
+	DEC 111
+	DEC 32
+	DEC 104
+	DEC 105
+	DEC 103
+	DEC 104
+	DEC 46
+	DEC 10
+	DEC -1 / End string
+StringGuessTooLow, HEX 04D
+	DEC 89
+	DEC 111
+	DEC 117
+	DEC 32
+	DEC 103
+	DEC 117
+	DEC 101
+	DEC 115
+	DEC 115
+	DEC 101
+	DEC 100
+	DEC 32
+	DEC 116
+	DEC 111
+	DEC 111
+	DEC 32
+	DEC 108
+	DEC 111
+	DEC 119
+	DEC 46
+	DEC 10
+	DEC -1 / End string
+StringYouWin, HEX 064
+	DEC 89
+	DEC 111
+	DEC 117
+	DEC 32
+	DEC 119
+	DEC 105
+	DEC 110
+	DEC 33
+	DEC 32
+	DEC 58
+	DEC 41
+	DEC 10
+	DEC -1 / End string
+StringYouLose, HEX 072
+	DEC 89
+	DEC 111
+	DEC 117
+	DEC 32
+	DEC 108
+	DEC 111
+	DEC 115
+	DEC 101
+	DEC 33
+	DEC 32
+	DEC 58
+	DEC 40
+	DEC 9
+	DEC 10
+	DEC -1
+
+
+/ ### SUBROUTINE: Prints the string starting at the position given in the variable X ###
+
+SubrPrintStringX, HEX 0
+Load X
+Add _ONE
+Store Index
+SubrPrintString_Loop, Clear
+LoadI Index
+Skipcond 800
+JumpI SubrPrintStringX / if value < 0, exit
+Output
+Load Index
+Add _ONE
+Store Index
+Jump SubrPrintString_Loop
+
+/ ### SUBROUTINE: Prints "Guess number!(0-100)" ###
+
+SubrPrintGuessANumber, DEC 170
+Load StringGuessANumber
+Store X
+JnS SubrPrintStringX
+JumpI SubrPrintGuessANumber
+
+/ ### SUBROUTINE: Prints "You guessed too high." ###
+
+SubrPrintGuessTooHigh, HEX 000
+Load StringGuessTooHigh
+Store X
+JnS SubrPrintStringX
+JumpI SubrPrintGuessTooHigh
+
+/ ### SUBROUTINE: Prints "You guessed too low." ###
+
+SubrPrintGuessTooLow, HEX 000
+Load StringGuessTooLow
+Store X
+JnS SubrPrintStringX
+JumpI SubrPrintGuessTooLow
+
+/ ### SUBROUTINE: Prints "You lose! :(" ###
+
+SubrPrintYouLose, HEX 000
+Load StringYouLose
+Store X
+JnS SubrPrintStringX
+JumpI SubrPrintYouLose
+
+/ ### SUBROUTINE: Prints "You win! :)" ###
+
+SubrPrintYouWin, HEX 000
+Load StringYouWin
+Store X
+JnS SubrPrintStringX
+JumpI SubrPrintYouWin
+
+/ ### GAME VARIABLES ###
+SecretNumber, dec 53
+YourNumber, dec 0
+Difference, dec 0
+GuessCount, dec 0
+MaximumGuesses, dec 5
+
+/ ### ANONYMOUS VARIABLES ###
+Index, 	dec 0
+Temp, 	dec 0
+
+/ ### SUBROUTINE PARAMETERS ###
+/ global variables (for use as subroutine parameters)
+X, 	dec 0
+Y, 	dec 0
+Z, 	dec 0
+
+/ ### GLOBAL CONSTANTS ###
+_ZERO, 	dec 0
+_ONE, 	dec 1
+_TWO, 	dec 2
+

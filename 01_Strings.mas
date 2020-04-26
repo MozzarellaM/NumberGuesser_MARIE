@@ -1,0 +1,57 @@
+/ 01_Strings.mas
+	Jump Main
+StringHelloWorld, HEX 001
+	DEC 72	/'H'
+	DEC 101 /'e'
+	DEC 108 /'l'
+	DEC 108 /'l'
+	DEC 111 /'o'
+	DEC 32  / space
+	DEC 119 /'w'
+	DEC 111 /'o'
+	DEC 114 /'r'
+	DEC 108 /'l'
+	DEC 100 /'d'
+	DEC 33  /'!'
+	DEC 32	/ space
+	DEC 58  /':'
+	DEC 41  /')'
+	DEC 10  / newline
+	DEC -1  / end of string
+
+/ ### SUBROUTINE: Prints the string starting at the position given in the variable X ###
+
+SubrPrintStringX, HEX 000
+	Load X
+	Add _ONE
+	Store Index
+	SubrPrintString_Loop, Clear
+	LoadI Index
+	Skipcond 800
+	JumpI SubrPrintStringX / if value < 0, exit
+	Output
+	Load Index
+	Add _ONE
+	Store Index
+	Jump SubrPrintString_Loop
+
+Main, 	Clear
+	Load StringHelloWorld
+	Store X
+	JnS SubrPrintStringX
+	Halt
+
+/ ### ANONYMOUS VARIABLES ###
+Index, 	dec 0
+Temp, 	dec 0
+
+/ ### SUBROUTINE PARAMETERS ###
+/ global variables (for use as subroutine parameters)
+X, 	dec 0
+Y, 	dec 0
+Z, 	dec 0
+
+/ ### GLOBAL CONSTANTS ###
+_ZERO, 	dec 0
+_ONE, 	dec 1
+_TWO, 	dec 2

@@ -1,0 +1,20 @@
+/# 04_Hello.mas
+	Load THE_LETTER_H
+	Output
+	Load THE_LETTER_E
+	Output
+	Load THE_LETTER_L
+	Output
+	Output
+	Load THE_LETTER_O
+	Output
+	Load EXCLAMATION!
+	Output
+	Halt
+	
+
+THE_LETTER_H, dec 72
+THE_LETTER_E, dec 69
+THE_LETTER_L, dec 76
+THE_LETTER_O, dec 79
+EXCLAMATION!, dec 33

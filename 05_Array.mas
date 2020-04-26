@@ -1,0 +1,38 @@
+/# 05_Array.mas
+Jump Main
+/ array[4] = [9, 8, 7, 6]
+ArrayStartAddress, HEX 001
+	dec 9
+	dec 8
+	dec 7
+	dec 6
+
+SubrOutputArrayItemX, HEX 000 
+/ given param X, outputs the Xth item in the array
+	Load ArrayStartAddress
+	Add X
+	Store Addr
+	LoadI Addr
+	Output
+	JumpI SubrGetArrayItemX
+
+Main, Clear
+	Load ArrayStartAddress
+	Store X
+	Load _ONE
+	Store Y
+	JnS SubrOutputArrayItemXY
+	Load Y
+	Add _ONE
+	
+
+X, 	dec 0
+Y, 	dec 0
+Z, 	dec 0
+Addr, 	dec 0
+
+_ONE, 	dec 1
+_TWO, 	dec 2
+_THREE, dec 3
+_FOUR, 	dec 4
+
