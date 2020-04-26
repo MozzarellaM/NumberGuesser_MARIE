@@ -1,6 +1,6 @@
 # NumberGuesser.mas
 
-This repository contains code for a final project created Computer Organization Lab at Kennesaw State University.
+This repository contains code for a final project created for CS 3503L: Computer Organization Lab at Kennesaw State University.
 
 ## How to use:
 
